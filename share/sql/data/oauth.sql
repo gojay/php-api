@@ -1,0 +1,12 @@
+INSERT INTO oauth_scopes (scope) VALUES ('supportedscope1');
+INSERT INTO oauth_scopes (scope) VALUES ('supportedscope2');
+INSERT INTO oauth_scopes (scope) VALUES ('supportedscope3');
+INSERT INTO oauth_scopes (scope) VALUES ('clientscope1');
+INSERT INTO oauth_scopes (scope) VALUES ('clientscope2');
+INSERT INTO oauth_scopes (scope) VALUES ('clientscope3');
+INSERT INTO oauth_scopes (scope, is_default) VALUES ('defaultscope1', 1);
+INSERT INTO oauth_scopes (scope, is_default) VALUES ('defaultscope2', 1);
+INSERT INTO oauth_users (username, password, firstname, lastname, email) VALUES ("dani", "$2y$09$u8JCne/NCfEwclVgj1GjuOxEgQXdFO1bBIvb9IKdNO6Ndt4vqpOj6", "Dani", "Rahmat", "dani.gojay@gmail.com");
+INSERT INTO oauth_users (username, password, firstname, lastname, email) VALUES ("gojay", "$2y$09$u8JCne/NCfEwclVgj1GjuOxEgQXdFO1bBIvb9IKdNO6Ndt4vqpOj6", "Dani", "Gojay", "gojay.rocks@yahoo.com");
+INSERT INTO `oauth_clients` (`client_id`, `client_secret`, `grant_types`, `scope`, `user_id`) VALUES ('1413098331', 'ad1dc1565228c29a1a2ef078952b70920543772a2', 'client_credentials', 'clientscope1 clientscope2', '1');
+INSERT INTO `oauth_clients` (`client_id`, `client_secret`, `grant_types`, `scope`, `user_id`) VALUES ('1413098344', '66a3eb9d8de587d82e951fbaa69bdb080543a2208', 'password refresh_token', 'clientscope1', '2');

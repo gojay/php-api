@@ -1,0 +1,35 @@
+{
+    "name": "gojay/banner-api",
+    "description": "Restfull API for banner",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dani Gojay",
+            "email": "dani.gojay@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "slim/slim": "*",
+        "slim/extras": "*",
+        "slim/middleware": "*",
+        "monolog/monolog": "*",
+        "flynsarmy/slim-monolog": "*",
+        "bshaffer/oauth2-server-php": "v1.3",
+        "illuminate/database": "*",
+        "davedevelopment/phpmig": "*",
+        "pimple/pimple": "1.*",
+        "league/fractal": "0.9.*"
+    },
+    "config": {
+        "bin-dir": "bin/"
+    },
+    "archive": {
+        "exclude": ["vendor", ".DS_Store", "*.log"]
+    },
+    "autoload": {
+        "psr-0": {
+            "App": "."
+        }
+    }
+}

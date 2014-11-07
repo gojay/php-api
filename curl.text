@@ -1,0 +1,125 @@
+# Client Credentials
+# ===========================================================
+# user : dani
+# grant type : client_credentials
+# --------------------------------------------------
+# Content-Type: application/x-www-form-urlencoded
+# --------------------------------------------------
+curl -v http://localhost:8080/api/v1/auth/login -d "grant_type=client_credentials" -u 1413098331:ad1dc1565228c29a1a2ef078952b70920543772a2
+# --------------------------------------------------
+# Content-Type: application/json
+# --------------------------------------------------
+curl -v http://localhost:8080/api/v1/auth/login -d "{\"grant_type\":\"client_credentials\"}" -u 1413098331:ad1dc1565228c29a1a2ef078952b70920543772a2 -H "Content-Type: application/json"
+# --------------------------------------------------
+# Content-Type: application/x-www-form-urlencoded
+# --------------------------------------------------
+curl -v http://localhost:8080/api/v1/auth/login -d "grant_type=client_credentials" -H "Authorization: Basic MTQxMzA5ODMzMTphZDFkYzE1NjUyMjhjMjlhMWEyZWYwNzg5NTJiNzA5MjA1NDM3NzJhMg=="
+# Content-Type: application/json
+curl -v http://localhost:8080/api/v1/auth/login -d "{\"grant_type\":\"client_credentials\"}" -H "Authorization: Basic MTQxMzA5ODMzMTphZDFkYzE1NjUyMjhjMjlhMWEyZWYwNzg5NTJiNzA5MjA1NDM3NzJhMg==" -H "Content-Type: application/json"
+
+# user : gojay
+# grant type : password
+# response : {"error":"unauthorized_client","error_description":"The grant type is unauthorized for this client_id"}
+# --------------------------------------------------
+# Content-Type: application/json
+# --------------------------------------------------
+curl -v http://localhost:8080/api/v1/auth/login -d "{\"grant_type\":\"client_credentials\"}" -u 1413098344:66a3eb9d8de587d82e951fbaa69bdb080543a2208 -H "Content-Type: application/json"
+
+# User Credentials
+# ===========================================================
+# user : dani
+# grant type : client_credentials
+# {"error":"unauthorized_client","error_description":"The grant type is unauthorized for this client_id"}
+# --------------------------------------------------
+# Content-Type: application/x-www-form-urlencoded
+# --------------------------------------------------
+curl -v http://localhost:8080/api/v1/auth/login -d "grant_type=password&username=dani&password=gojay86" -u 1413098331:ad1dc1565228c29a1a2ef078952b70920543772a2
+curl -v http://localhost:8080/api/v1/auth/login -d "grant_type=password&username=dani&password=gojay86" -H "Authorization: Basic MTQxMzA5ODMzMTphZDFkYzE1NjUyMjhjMjlhMWEyZWYwNzg5NTJiNzA5MjA1NDM3NzJhMg=="
+# --------------------------------------------------
+# Content-Type: application/json
+# --------------------------------------------------
+curl -v http://localhost:8080/api/v1/auth/login -d "{\"grant_type\":\"password\",\"username\":\"dani\",\"password\":\"gojay86\"}" -H "Content-Type: application/json" -u 1413098331:ad1dc1565228c29a1a2ef078952b70920543772a2
+
+# user : gojay
+# grant type : password
+# --------------------------------------------------
+# Content-Type: application/x-www-form-urlencoded
+# --------------------------------------------------
+curl -v http://localhost:8080/api/v1/auth/login -d "grant_type=password&username=gojay&password=gojay86" -u 1413098344:66a3eb9d8de587d82e951fbaa69bdb080543a2208
+curl -v http://localhost:8080/api/v1/auth/login -d "grant_type=password&username=gojay&password=gojay86" -H "Authorization: Basic MTQxMzA5ODMzMTphZDFkYzE1NjUyMjhjMjlhMWEyZWYwNzg5NTJiNzA5MjA1NDM3NzJhMg=="
+# --------------------------------------------------
+# Content-Type: application/json
+# --------------------------------------------------
+curl -v http://localhost:8080/api/v1/auth/login -d "{\"grant_type\":\"password\",\"username\":\"gojay\",\"password\":\"gojay86\"}" -H "Content-Type: application/json" -u 1413098344:66a3eb9d8de587d82e951fbaa69bdb080543a2208
+
+# --------------------------------------------------
+# if is public / client secret is null
+# --------------------------------------------------
+curl -v http://localhost:8080/api/v1/auth/login -d "{\"grant_type\":\"password\",\"client_id\":\"1413098344\",\"username\":\"gojay\",\"password\":\"gojay86\"}" -H "Content-Type: application/json"
+
+# GET Oauth Resource
+curl -v http://localhost:8080/api/v1/contacts -H "Authorization: Bearer {access_token}"
+curl -v http://localhost:8080/api/v1/contacts?access_token={access_token}
+
+# example response user Credentials
+{
+	"access_token":"c7f2487cc8c0210483f15528d9d9af470b18cff7",
+	"expires_in":3600,
+	"token_type":"Bearer",
+	"scope":"clientscope1",
+	"refresh_token":"3f6ed05e8199f90934b097f772c41ab672281c18"
+}
+curl -v "http://localhost:8080/api/v1/contacts?access_token=4ee17197c6e770b91bb5e100f603bcd4aee6cdbd"
+curl -v http://localhost:8080/api/v1/contacts -H "Authorization: Bearer 860f824ec8b1c74979ba04c42f9b094d495bafe9"
+
+# Crypto Token
+# --------------------------------------------------
+curl -v http://localhost:8080/api/v1/auth/me -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpZCI6IjY2OTdkYWYzZjRjN2JiMjQ0OWZjNzlhNjAzMDEyOGM1YmYzNDA2ZjMiLCJjbGllbnRfaWQiOiIxNDEzMDk4MzQ0IiwidXNlcl9pZCI6IjIiLCJleHBpcmVzIjoxNDEzODEyNjc2LCJ0b2tlbl90eXBlIjoiYmVhcmVyIiwic2NvcGUiOiJjbGllbnRzY29wZTEifQ.DzUnwuZc_Wut3CowdRGUZlyF9QKD0c_LA5rXeeV1bNvYK5DJ8CSn1ZXoFASPyevZAEHOolLtw3_66KOIDVKQ8g_YZgfoeYKMwav1jOBfisZVbYa1Yq9za-PgO6Vr2OkPzLrGVhFq58_qJHTLlbZVJRbfcCmAqXUqdY38ay9LHTXJ6-GcmaUmTNeWvky92TQa3tMbPhmTXJYOotKvo6a2BQ71cDkN9EQbnSq6UZOaCttRTHcCm4JGUnDtrhu3uQG5MQqE0z56NTEXCX7KMNrQg17kr9L517ghvRLnG49b2J64BH9_3Sl92hnT2H_vkRKxTGOAqtPJKaF_mNVe_RH9tw"
+
+# Refresh Token
+# ===========================================================
+curl -v http://localhost:8080/api/v1/auth/login -d "{\"grant_type\":\"refresh_token\",\"refresh_token\":\"3f6ed05e8199f90934b097f772c41ab672281c18\", \"scope\":\"clientscope2\"}" -u 1413098344:66a3eb9d8de587d82e951fbaa69bdb080543a2208 -H "Content-Type: application/json"
+
+# JWT
+# ===========================================================
+curl -v http://localhost:8080/api/v1/auth/login -d "{\"grant_type\":\"urn:ietf:params:oauth:grant-type:jwt-bearer\",\"assertion\":\"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIxNDEzMDk4MzQ0Iiwic3ViIjoiMiIsIm5iZiI6MTQxMzgwNzgzNCwiZXhwIjoxNDEzODExNDM0LCJpYXQiOjE0MTM4MDc4MzQsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MCJ9.rPB1YBkgEMsyaIp5KGLxUhCYEN0Cu8f1Ok37zFaEtbUJOr9taf9hgDJrJMAEDnpuCWtpmIA_rsQyA06YXcXjMX_bAdqzYE0DjY0IrGX0xXZlHULXgr_gAK86qUPqEZW305sS_IAjJpTZsiYKxmy0zFsEyB7CWZ_Kv8YoZ-6efuTDUZ4OOJs1hGyUobdqfQH6edqnelwt38aj49C34_ENSmaoKzE-GiWdYQXuIGXYIHXVezZARbtKDbsAIr9tzgDzAVmpy7VsDCRMXAmfVU5ISMeLyPZOvyyPzP86cyUfBxDdE8wxHTQV7U2m9eGmxSFaecq8IOfgef5P_l5dFuO2uQ\"}" -H "Content-Type: application/json"
+
+curl -v http://api/banner-api/public/api/v1/auth/login -d "{\"grant_type\":\"urn:ietf:params:oauth:grant-type:jwt-bearer\",\"assertion\":\"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIxNDEzMDk4MzQ0Iiwic3ViIjoiMiIsIm5iZiI6MTQxMzgwNjkyMywiZXhwIjoxNDEzODEwNTIzLCJpYXQiOjE0MTM4MDY5MjMsImF1ZCI6Imh0dHA6Ly9hcGkvYmFubmVyLWFwaS9wdWJsaWMvYXBpL3YxIn0.lqRIema1MGZ5rERQROShI2C6zMORp09pcATa_6Ob8eiseHxuTdB9Sjn6JVIC2MBhg7YBtpPC6hbNjkk39ugBPEkSWgFwwuZztTcpFMQ65bfHCMT8X4W77ZmEGktQQ88FUy8KK3bKTpNCbhK1-YHS1Vq_G0I-smzPMcxc4vSySJJ5NCXyzGRVKDOrx08uVXEgz8i8lEiD1rUtdmrQSnm2dObiPCfQNtirU2ZPtuQG784ZWr-WUjYf9ZdXcKI6-SNeSvpWsu6bYDaGnjMXt9kBtz9eCogL5xJOCzJL0Fezp_ERcKB4g-xO7aNvXAoVpNac-H8Q4JtaOVLb3P0eMjLKcg\"}" -H "Content-Type: application/json"
+
+
+{"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpZCI6IjFmNDY0ZDJmNTk1ZTBmOGI5YTRhNjMzNWQ2NWIwYTRkZDBkZjFjNzAiLCJjbGllbnRfaWQiOiIxNDEzMDk4MzMxIiwidXNlcl9pZCI6IjEiLCJleHBpcmVzIjoxNDEzNzk1NzI4LCJ0b2tlbl90eXBlIjoiYmVhcmVyIiwic2NvcGUiOiJjbGllbnRzY29wZTEgY2xpZW50c2NvcGUyIn0.Kna9wmzY7yUYq12DaEuitzuppAjT9aHMsYwKhCHKS5TQX5gYJCEKOO8wtuiTYMJO4eLy7yO5tdWeDGMIWZCNM1UiuDIJmUskQB_jFCXitOZFOIJrmc3_VcBtVwvBSB-ixDHIixzPgplTQLkQFy4KbHNMb7oE_b2qGnwgkeMDlDoEcJGjidPiPMNohK81Tl-zBezxoKPyclOWyDmg4gqGvSHvCX_WdLhX7PUTwol-OCvQmslMTyGnA7Vc9f5lzHcEnX7pyIqunTTvwJskJP9ySAqopP-Kdg-sHkXNBPWE1qHchp_mMH62KP8rhnkwW68RKh1E-Z9w5ojlqy4xT_tcGA","expires_in":3600,"token_type":"bearer","scope":"clientscope1 clientscope2"}
+
+# Upload
+# ===========================================================
+curl -v -F name=kitty -F image=@hello-kitty.jpg http://localhost:8080/api/v1/upload
+curl -v -F name=kitty -F width=50 -F image=@hello-kitty.jpg http://localhost:8080/api/v1/upload
+
+# example data json
+{
+    "firstname": "John",
+    "lastname": "Doe",
+    "email": "john.doe@example.com",
+    "notes": [
+        {
+            "id": 1,
+            "body": "lorem ipsum"
+        },
+        {
+            "id": 2,
+            "body": "lorem ipsum dolor"
+        }
+    ]
+ }
+
+# POST Contacts
+# ===========================================================
+curl -v "http://localhost:8080/api/v1/contacts" -H "Authorization: Bearer {access_token}" -H "Content-Type: application/json" -d "{\"firstname\":\"Dani\",\"lastname\":\"Gojay\",\"email\":\"dani.gojay@gmail.com\",\"phone\":\"082138452360\"}"
+
+# PUT Contacts
+# ===========================================================
+curl -v "http://localhost:8080/api/v1/contacts/{id}" -H "Authorization: Bearer {access_token}" -H "Content-Type: application/json" -d "{\"id\":101, \"firstname\":\"Dani\"}"
+
+
+# DELETE Contacts
+# ===========================================================
+curl -v -X DELETE "http://api.local/REST/public/api/v1/contacts/101" -H "Authorization: Bearer cdde9e4e8ad45a7c8f459dc73c47cd687143e7f9"
