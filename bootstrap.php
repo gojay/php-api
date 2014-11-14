@@ -1,7 +1,7 @@
 <?php
 define('BASE_URL', 'http://' . $_SERVER['SERVER_NAME'] . '/banner-api');
 define('BASE_PATH', dirname(__FILE__));
-define('UPLOAD_URL', BASE_URL . '/banner-api/public/images');
+define('UPLOAD_URL', BASE_URL . '/public/images');
 define('UPLOAD_PATH', BASE_PATH . '/public/images');
 
 require_once dirname(__FILE__) . '/vendor/autoload.php';

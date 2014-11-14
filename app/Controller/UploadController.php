@@ -87,19 +87,18 @@ class UploadController extends BaseController
             $imagehand->file_dst_name_ext  = $extension;
             $imagehand->file_new_name_body = $name;
             $imagehand->file_overwrite     = true;
-            $imagehand->image_crop         = '107 193 917 574';
-            // $imagehand->image_resize       = true;
-            // if( $ratio && empty($width) ){
-            //     $imagehand->image_y = $height;
-            //     $imagehand->image_ratio_x = true;
-            // } elseif( $ratio && empty($height) ){
-            //     $imagehand->image_x = $width;
-            //     $imagehand->image_ratio_y = true;
-            // } else {
-            //     $imagehand->image_x = $width;
-            //     $imagehand->image_y = $height;
-            //     $imagehand->image_ratio = $ratio;
-            // }
+            $imagehand->image_resize       = true;
+            if( $ratio && empty($width) ){
+                $imagehand->image_y = $height;
+                $imagehand->image_ratio_x = true;
+            } elseif( $ratio && empty($height) ){
+                $imagehand->image_x = $width;
+                $imagehand->image_ratio_y = true;
+            } else {
+                $imagehand->image_x = $width;
+                $imagehand->image_y = $height;
+                $imagehand->image_ratio = $ratio;
+            }
             $imagehand->process($upload_path);
             if (!$imagehand->processed) {
                 throw new Exception('error : ' . $imagehand->error);
